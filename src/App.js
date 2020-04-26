@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
+import {
+  HashRouter,
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import { HomePage, SubmitPage } from './pages'
+import { AppContainer } from './components'
 import './App.css';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HashRouter basename="/">
+      {/* A <Switch> looks through its children <Route>s and
+          renders the first one that matches the current URL. */}
+      <Switch>
+        <Route path="/submit">
+          <Submit />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </HashRouter>
   );
 }
 
-export default App;
+function Home() {
+  return <AppContainer>
+    <HomePage/>
+  </AppContainer>;
+}
+
+function Submit() {
+  return <AppContainer>
+    <SubmitPage/>
+  </AppContainer>;
+}
